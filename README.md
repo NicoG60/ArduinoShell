@@ -28,7 +28,7 @@ The main ino file is really simple, it initialize the Serial object in `setup()`
 ## Write a Shell Plugin
 
 #### Begin a new plugin
-To write a plugin, juste create a new ino file and declare a class that inherit from the ShellPLugin class. It must have a default constructor that call the default ShellPlugin constructor. At the end of the declaration, call the macro `REGISTER_SHELLPLUGIN(ClassName)`
+To write a plugin, just create a new ino file in the ArduinoShell sketch folder and declare a class that inherit from the ShellPLugin class. It must have a default constructor that call the default ShellPlugin constructor. At the end of the declaration, call the macro `REGISTER_SHELLPLUGIN(ClassName)`
 
 the class implementation can be done directly in the declaration, Java style.
 
@@ -113,4 +113,4 @@ int aread() {
 }
 ```
 
-You can find the `BasicShell.ino` file to see the complete code of this example.
+You can find the `examples` folder for full example. Just copy them into the main sketch folder and compile with the arduino IDE.
