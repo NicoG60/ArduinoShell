@@ -44,7 +44,7 @@ protected:
    * @return     if it goes well, write "done" on the terminal and retrun done. otherwise return next.
    */
   int config() {
-    GET_DPIN  //Get the digital pin id as first arg
+    GET_DPIN(dpin)  //Get the digital pin id as first arg
 
     char* _mode = getNextArg(); //get the mode
 
@@ -84,7 +84,7 @@ protected:
    * @return     if it goes well, write "done" on the terminal and retrun done. otherwise return next.
    */
   int write() {
-    GET_DPIN
+    GET_DPIN(dpin)
 
     char* _value = getNextArg();
 
@@ -109,7 +109,7 @@ protected:
    * @return     if it goes well, write the value on the terminal and return done. otherwise return next.
    */
   int read() {
-    GET_DPIN
+    GET_DPIN(dpin)
     CHECK_END_ARGS
 
     return value(digitalRead(dpin));
@@ -123,7 +123,7 @@ protected:
    *
    * @return     if it goes well, write the value on the terminal and return done. otherwise return next.   */
   int aread() {
-    GET_APIN
+    GET_APIN(apin)
     CHECK_END_ARGS
 
     return value(analogRead(apin));
@@ -138,7 +138,7 @@ protected:
    *
    * @return     if it goes well, write the value on the terminal and return done. otherwise return next.   */
   int pwm() {
-    GET_DPIN
+    GET_DPIN(dpin)
 
     char* _value = getNextArg();
 
