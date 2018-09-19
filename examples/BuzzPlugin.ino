@@ -24,9 +24,9 @@ public:
 
 protected:
   /**
-   * @brief      the function associated to the d command
+   * @brief      the function associated to the b command
    * 
-   * Read the distance, 255 = infinite;
+   * Buzz a pin at given freq and duration
    * @return     if it goes well, write "done" on the terminal and retrun done. otherwise return next.
    */
   int buzz() {
