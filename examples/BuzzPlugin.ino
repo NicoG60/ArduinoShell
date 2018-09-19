@@ -17,7 +17,7 @@ public:
   int parse() {
     BEGIN_PARSE
 
-    ASSOC(o,buzz) //command d <pinPulse> <pinEcho>
+    ASSOC(b,buzz) //command b <pin> <freq> <duration>
 
     END_PARSE
   }
