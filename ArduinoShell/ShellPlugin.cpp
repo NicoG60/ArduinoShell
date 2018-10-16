@@ -29,7 +29,7 @@ void ShellPlugin::process()
 		//clear the buffer
 		memset(_buffer, 0, bufSize*sizeof(char));
 		//read them until terminator char
-		_s->readBytesUntil(';', _buffer, bufSize);
+		_s->readBytesUntil('\r', _buffer, bufSize);
 
 		//if the buffer is full, ignore because it shouldn't. Never.
 		if(_buffer[strSize] == 0 && _begin)
