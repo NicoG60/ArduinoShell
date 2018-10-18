@@ -34,9 +34,9 @@
 #include <Arduino.h>
 
 /**
- * @brief      Register a plugin in the system
+ * @brief Register a plugin in the system
  *
- * @param      c     the name of the class
+ * @param c : the name of the class
  */
 #define REGISTER_SHELLPLUGIN(c) c reg##c();
 
@@ -47,17 +47,17 @@
 #define NEXT -1
 
 /**
- * @brief      Convinience macro to compare the value of a C-style string (char*) variable.
+ * @brief Convinience macro to compare the value of a C-style string (char*) variable.
  *
- * @param      v     the variable
- * @param      c     the value to compare, without the quotes.
+ * @param v : the variable
+ * @param c : the value to compare, without the quotes.
  * 
  * @exemple
  * @code
  * if(COMP(myVar,testString))
  * @endcode
  *
- * @return     true if they match, false otherwise.
+ * @return true if they match, false otherwise.
  */
 #define COMP(v,c) strcmp(v, #c ) == 0
 
@@ -68,9 +68,9 @@
  */
 #define GET_DPIN(v) \
 	char* _##v = getNextArg();\
-    if(!_##v) return next();\
-    int v = getDPin(_##v);\
-    if(v == -1) return next();
+	if(!_##v) return next();\
+	int v = getDPin(_##v);\
+	if(v == -1) return next();
 
 /**
  * @brief Convinience macro that extract a analog pin id from the serial and declare it as an int;
@@ -79,9 +79,9 @@
  */
 #define GET_APIN(v) \
 	char* _##v = getNextArg();\
-    if(!_##v) return next();\
-    int v = getDPin(_##v);\
-    if(v == -1) return next();
+	if(!_##v) return next();\
+	int v = getDPin(_##v);\
+	if(v == -1) return next();
 
 /**
  * @brief Convinience macro that check if we reach the ends of the args.
@@ -89,8 +89,8 @@
  * If not called, there is no more possibility to extend the behavior of a command.
  */
 #define CHECK_END_ARGS \
-    char* _ShellPluginEndArgs = getNextArg();\
-    if(_ShellPluginEndArgs) return next();
+	char* _ShellPluginEndArgs = getNextArg();\
+	if(_ShellPluginEndArgs) return next();
 
 /**
  * @brief Begin a parse function.
@@ -99,10 +99,10 @@
 #define BEGIN_PARSE char* cmd = getCmd(); if(!cmd) return NEXT;
 
 /**
- * @brief      Associate a command with a callback member function
+ * @brief Associate a command with a callback member function
  * 
- * @param      c     the command without the quotes
- * @param      f     the member function name
+ * @param c : the command without the quotes
+ * @param f : the member function name
  *
  * The callback member function should return an int, a classic return code and shouldn't take arguments.
  * 
@@ -126,127 +126,127 @@
 #define strSize bufSize-1
 
 /**
- * @brief      base Class for shell plugin.
+ * @brief base Class for shell plugin.
  * 
  * Every plugin should derived from this class.
  */
 class ShellPlugin
 {
 public:
-    /**
-     * @brief      this is the default constructor. every plugin should implement a default constructor and call this one.
-     */
+	/**
+	 * @brief this is the default constructor. every plugin should implement a default constructor and call this one.
+	 */
 	ShellPlugin(); //Contruct the plugin by register it in the chain
 
-    /**
-     * @brief      the function that every plugin has to implement.
-     * 
-     * @example
-     * @code
-     * int parse() {
-     *     BEGIN_PARSE
-     *     
-     *     ASSOC(myCommand,myCallback)
-     *     
-     *     END_PARSE
-     * }
-     * @endcode
-     *
-     * @return     a return code that indicates if the command was handle or not.
-     */
+	/**
+	 * @brief the function that every plugin has to implement.
+	 * 
+	 * @example
+	 * @code
+	 * int parse() {
+	 *     BEGIN_PARSE
+	 *     
+	 *     ASSOC(myCommand,myCallback)
+	 *     
+	 *     END_PARSE
+	 * }
+	 * @endcode
+	 *
+	 * @return a return code that indicates if the command was handle or not.
+	 */
 	virtual int parse() = 0; //the callback function
 
-    /**
-     * @brief      The main event loop
-     * It is called in the loop function of arduino
-     */
+	/**
+	 * @brief The main event loop
+	 * It is called in the loop function of arduino
+	 */
 	static void process(); //main loop
 
 protected:
-    /**
-     * @brief      get a digital pin id from the string arg
-     *
-     * @param      pin   The pin
-     *
-     * @return     The pin id.
-     * 
-     * You should use the GET_DPIN macro instead. it perfoms also safty check.
-     */
+	/**
+	 * @brief get a digital pin id from the string arg
+	 *
+	 * @param pin : The pin
+	 *
+	 * @return The pin id.
+	 * 
+	 * You should use the GET_DPIN macro instead. it perfoms also safty check.
+	 */
 	int getDPin(char* pin);
 
-    /**
-     * @brief      get a analog pin id from the string arg
-     *
-     * @param      pin   The pin
-     *
-     * @return     The pin id.
-     * 
-     * You should use the GET_APIN macro instead. it perfoms also safty check.
-     */
+	/**
+	 * @brief get a analog pin id from the string arg
+	 *
+	 * @param pin : The pin
+	 *
+	 * @return The pin id.
+	 * 
+	 * You should use the GET_APIN macro instead. it perfoms also safty check.
+	 */
 	int getAPin(char* pin);
 
-    /**
-     * @brief      Gets the command.
-     *
-     * @return     The command.
-     * 
-     * shouldn't be called directly. It is called in BEGIN_PARSE macro
-     */
+	/**
+	 * @brief Gets the command.
+	 *
+	 * @return The command.
+	 * 
+	 * shouldn't be called directly. It is called in BEGIN_PARSE macro
+	 */
 	char* getCmd();
 
-    /**
-     * @brief      Gets the next argument.
-     *
-     * @return     The next argument.
-     * 
-     * Juste after calling getCmd(), get the followings aguments, or return null if no more args.
-     */
+	/**
+	 * @brief Gets the next argument.
+	 *
+	 * @return The next argument.
+	 * 
+	 * Juste after calling getCmd(), get the followings aguments, or return null if no more args.
+	 */
 	char* getNextArg();
 
-    /**
-     * @brief      the done function
-     *
-     * @return     the DONE return code
-     * 
-     * This function should be call to end the command parsing saying "Hey, I got it".
-     */
+	/**
+	 * @brief the done function
+	 *
+	 * @return the DONE return code
+	 * 
+	 * This function should be call to end the command parsing saying "Hey, I got it".
+	 */
 	int done();
 
-    /**
-     * @brief      the next function
-     *
-     * @return     the NEXT return code
-     * 
-     * This function should be call to end the command parsing saying "Sorry man, I don't know this one".
-     */
+	/**
+	 * @brief the next function
+	 *
+	 * @return the NEXT return code
+	 * 
+	 * This function should be call to end the command parsing saying "Sorry man, I don't know this one".
+	 */
 	int next() { return NEXT; }
 
-    /**
-     * @brief      the value function
-     *
-     * @return     the DONE return code
-     * 
-     * This function should be call to end the command parsing saying "Hey, I got it and here is the value I've just read!".
-     */
+	/**
+	 * @brief the value function
+	 *
+	 * @return the DONE return code
+	 * 
+	 * This function should be call to end the command parsing saying "Hey, I got it and here is the value I've just read!".
+	 */
 	int value(const __FlashStringHelper * p) 	{ printV(p); }
-    int value(const String & p) 				{ printV(p); }
-    int value(const char p[]) 					{ printV(p); }
-    int value(char p) 							{ printV(p); }
-    int value(unsigned char p, int f = DEC) 	{ printVF(p,f); }
-    int value(int p, int f = DEC) 				{ printVF(p,f); }
-    int value(unsigned int p, int f = DEC) 		{ printVF(p,f); }
-    int value(long p, int f = DEC) 				{ printVF(p,f); }
-    int value(unsigned long p, int f = DEC) 	{ printVF(p,f); }
-    int value(double p, int f = 2) 				{ printVF(p,f); }
-    int value(const Printable& p) 				{ printV(p); }
+	int value(const String & p) 				{ printV(p); }
+	int value(const char p[]) 					{ printV(p); }
+	int value(char p) 							{ printV(p); }
+	int value(unsigned char p, int f = DEC) 	{ printVF(p,f); }
+	int value(int p, int f = DEC) 				{ printVF(p,f); }
+	int value(unsigned int p, int f = DEC) 		{ printVF(p,f); }
+	int value(long p, int f = DEC) 				{ printVF(p,f); }
+	int value(unsigned long p, int f = DEC) 	{ printVF(p,f); }
+	int value(double p, int f = 2) 				{ printVF(p,f); }
+	int value(const Printable& p) 				{ printV(p); }
 
 private:
 
-	static ShellPlugin*    _begin; //begining of the chain
-	static char            _buffer[bufSize]; //input buffer
-	static char            _cmd[bufSize];
-	static HardwareSerial* _s;
-	ShellPlugin*           _next; //the next plugin to call if not parsed
+	static ShellPlugin* 	_begin; //begining of the chain
+	static char 			_buffer[bufSize]; //input buffer
+	static char 			_cmd[bufSize];
+	static HardwareSerial* 	_s;
+	ShellPlugin* 			_next; //the next plugin to call if not parsed
 };
 
 #endif //SHELLPLUGIN_H
