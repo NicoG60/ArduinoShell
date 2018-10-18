@@ -50,7 +50,7 @@ REGISTER_SHELLPLUGIN(BasicShell)
 Every plugin must implement the public `int parse()` method. For elegant programming, a serie of macros are defined to help you. Juste begin the function by calling `BEGIN_PARSE` macro, next associate a command to a callback member function with the `ASSOC` macro. And simlply end the function with the `END_PARSE` macro.
 
 In the `ASSOC` macro, you dont need to quote the command `"cmd"`, just write `cmd`. You don't need to give a function pointer too, juste the name of the function is ok.
-`ASSOC` is just synthetic sugar for a serie of `if else` statement.
+`ASSOC` is just syntactic sugar for a serie of `if else` statement.
 
 Example :
 ```cpp
